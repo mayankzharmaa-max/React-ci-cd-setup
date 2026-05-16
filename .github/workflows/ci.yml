@@ -16,7 +16,7 @@ jobs:
             - name: "Setup Node.js"
               uses: actions/setup-node@v4
               with:
-                node-version: 18
+                node-version: 20
             
             - name: "Install dependencies"
               run: npm install
@@ -26,6 +26,6 @@ jobs:
             
             - name: "Lint code"
               run: npm run lint
-             
-            - name: "check version"
+            
+            - name: "Check version"
               run: node --version
