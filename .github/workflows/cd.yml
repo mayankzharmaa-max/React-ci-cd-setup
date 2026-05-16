@@ -9,9 +9,24 @@ on:
 jobs:
     deploy:
         runs-on: ubuntu-latest
+        environment: production
         
         steps:
+                    - name: "Checkout repository"
+                      uses: actions/checkout@v3
+          - name: "setup Node.js"
+            uses: actions/setup-node@v4
+            with:
+              node-version: 20
+          - name: "setup vercel cli"
+            run: npm install -g vercel
+
           - name: "Download build files"
             uses: actions/download-artifact@v3
             with:
               name: build
+
+          - name: "Deploy to Vercel"
+            run: vercel --prod --token=$VERCEL_TOKEN --confirm --name=cicdproject
+            env:
+              VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
